@@ -4,3 +4,11 @@
 *.jar
 *.war
 *.ear
+
+# metadata
+.classpath
+.project
+.settings
+
+#temp/debug files
+debug*
