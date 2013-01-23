@@ -84,14 +84,132 @@ public class Board {
 	
 	private static void printPaths(Set<int[]> paths)
 	{
+		//hmp = how many paths
+		int hmp = paths.size();
+		//standard iterators
+		int i,j;
+		int [][] map = new int [hmp][16];
+		
+		//initialize map
+		for (i =0; i< hmp; i++)
+			for (j=0; j<16; j++)
+				map [i][j]=0;
+		
+		//populate map
+		i = 0;
 		for (int[] path : paths)
 		{
+			j = 0;
 			for (int move : path)
 			{
-				System.out.print(move+"->");
+				map[i][move] = ++j;
 			}
-			System.out.println("");
+			++i;
 		}
+		
+		//print header		
+		for (i =0; i< hmp; i++)
+		{
+			System.out.print("+---+---+---+---+  ");			
+		}
+		System.out.print("\n");
+
+		
+for (int line = 0; line < 4; line++)
+{
+		
+		//print line
+		for (i =0; i< hmp; i++)
+		{
+			for (j = line*4; j< (line*4)+4; j++)
+			{
+				if (map[i][j]!=0)
+					System.out.printf("|%2d ",map[i][j]);
+				else
+					System.out.print("|   ");
+			}
+			System.out.print("|  ");
+		}
+		System.out.println("");
+
+		
+		//print separator	
+		for (int[] path : paths)
+		{
+			System.out.print("+---+---+---+---+  ");
+		}
+		System.out.println("");
+}
+/*
+//print line 1
+		for (i =0; i< hmp; i++)
+		{
+			for (j = 4; j< 8; j++)
+			{
+				if (map[i][j]!=0)
+					System.out.printf("|%2d",map[i][j]);
+				else
+					System.out.print("|  ");
+			}
+			System.out.print("| ");
+		}
+		System.out.println("");
+
+		
+		
+		//print separator 1/2		
+		for (int[] path : paths)
+		{
+			System.out.print("+--+--+--+--+ ");			
+		}
+		System.out.println("");
+
+		
+		//print line 2
+		for (i =0; i< hmp; i++)
+		{
+			for (j = 8; j< 12; j++)
+			{
+				if (map[i][j]!=0)
+					System.out.printf("|%2d",map[i][j]);
+				else
+					System.out.print("|  ");
+			}
+			System.out.print("| ");
+		}
+		System.out.println("");
+
+		
+		//print separator 2/3		
+		for (int[] path : paths)
+		{
+			System.out.print("+--+--+--+--+ ");			
+		}
+		System.out.println("");
+
+		//print line 3
+		for (i =0; i< hmp; i++)
+		{
+			for (j = 12; j< 16; j++)
+			{
+				if (map[i][j]!=0)
+					System.out.printf("|%2d",map[i][j]);
+				else
+					System.out.print("|  ");
+			}
+			System.out.print("| ");
+		}
+		System.out.println("");
+
+		
+		
+		//print footer		
+		for (int[] path : paths)
+		{
+			System.out.print("+--+--+--+--+ ");			
+		}
+		System.out.println("");
+		*/
 	}
 	
 	private static int scrabblePoints (String word)
@@ -196,7 +314,7 @@ public class Board {
 		    
 		    for (String word : sortedWords)
 			{
-				System.out.print(word +": ");		
+				System.out.println(word +": ");		
 				printPaths(wordsToPath.get(word));
 			}
 			
