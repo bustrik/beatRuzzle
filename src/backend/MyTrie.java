@@ -37,9 +37,7 @@ public class MyTrie {
     
     private MyNode root;
     private MyNode pointer;
-    
-    
-    
+       
     
     public boolean isaPrefix (String wordToCheck)
     {
@@ -95,12 +93,11 @@ public class MyTrie {
     // Trie Constructor
 	public MyTrie(String dictionaryFile) 
 	{
-		System.out.println("Creating root node");
+//		System.out.println("Creating root node");
 		pointer = root = new MyNode(alphabet);
-		System.out.println("Root node created");
-		
-		
-		System.out.println("Loading dictionary");
+//		System.out.println("Root node created");
+
+//		System.out.println("Loading dictionary");
 		try
 		{
 			//Open file
@@ -119,7 +116,5 @@ public class MyTrie {
 			    }catch (IOException e){//Catch exception if any
 			  System.err.println("Error: " + e.getMessage());
 		}
-		
 	}
-	
 }

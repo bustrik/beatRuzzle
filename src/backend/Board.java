@@ -82,7 +82,7 @@ public class Board {
 		}
 	}
 	
-	public static void printPaths(Set<int[]> paths)
+	private static void printPaths(Set<int[]> paths)
 	{
 		for (int[] path : paths)
 		{
@@ -94,7 +94,7 @@ public class Board {
 		}
 	}
 	
-	public static int scrabblePoints (String word)
+	private static int scrabblePoints (String word)
 	{
 		int points = 0;
 		for (int i = 0; i < word.length(); i++)
@@ -136,10 +136,10 @@ public class Board {
 	
 	public static void main(String[] args) throws IOException {
 		
-		if (args.length != 2)
+		if (args.length != 1)
 		{
 			System.out.println("Wrong argument count, please use: ");
-			System.out.println(args[0]+ " dictionaryfile");
+			System.out.println("java backend.Board dictionaryfile");
 			System.exit(0);
 		}
 		
@@ -147,7 +147,7 @@ public class Board {
 		defineBoard();
 
 		System.out.println("Loading dictionary");		
-		Dictionary = new MyTrie ("args[1]");
+		Dictionary = new MyTrie (args[0]);
 		
 
 		System.out.println("Initialization completed - Please insert conversion string");
