@@ -12,3 +12,6 @@
 
 #temp/debug files
 debug*
+
+#dictionary files
+dictionaries/

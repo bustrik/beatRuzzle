@@ -1,0 +1,2 @@
+I think is just simple as typing:
+$ javac -d bin/ src/backend/*java
