@@ -1,39 +1,42 @@
 package backend;
 
-import java.util.HashMap;
 import java.io.*;
 
 
-class MyNode extends HashMap<String, MyNode>{
-
-	public String letter; //letter inside this node
+class MyNode{
+    public static char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
+        'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 
+        's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    
+    private MyNode[] map;
 	public boolean isaWord;
 	
-	public MyNode(String[] alphabet)
+	public MyNode()
 	{
-		for (String l : alphabet)
+		this.map = new MyNode[alphabet.length];
+		this.isaWord = false;
+		for (int i = 0; i < alphabet.length ; i++)
 		{
-			this.put(l, null);
-			this.letter = null;
-			this.isaWord = false;
+			this.map[i] = null;
 		}
 	}
-	
-	public MyNode(String[] alphabet, String letter)
+
+	public MyNode get(char letter)
 	{
-		for (String l : alphabet)
-		{
-			this.put(l, null);
-			this.letter = letter;
-		}
+		return this.map[letter - 'a'];
+	}
+	
+	public MyNode put(char letter)
+	{
+		MyNode children = new MyNode();
+		this.map[letter - 'a'] = children;		
+		return children;
 	}
 }
 
 
 public class MyTrie {
-    private static String[] alphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", 
-        "j", "k", "l", "m", "n", "o", "p", "q", "r", 
-        "s", "t", "u", "v", "w", "x", "y", "z"};
+    
     
     private MyNode root;
     private MyNode pointer;
@@ -46,7 +49,7 @@ public class MyTrie {
     	int l = wordToCheck.length();
     	for (int i = 0; i < l; i++)
     	{
-    		String nl = ""+wordToCheck.charAt(i);
+    		char nl = wordToCheck.charAt(i);
     		children = pointer.get(nl);
     		if (children == null)
     			return false;
@@ -62,7 +65,7 @@ public class MyTrie {
     	int l = wordToCheck.length();
     	for (int i = 0; i < l; i++)
     	{
-    		String nl = ""+wordToCheck.charAt(i);
+    		char nl = wordToCheck.charAt(i);
     		children = pointer.get(nl);
     		if (children == null)
     			return false;
@@ -76,14 +79,21 @@ public class MyTrie {
     	pointer = root;
     	MyNode children;
     	int l = newWord.length();
+    	  	
     	for (int i = 0; i < l; i++)
     	{
-    		String nl = ""+newWord.charAt(i);
-    		//controllo presenza nodo:
+    		char nl = newWord.charAt(i);
+    		//controllo alfabeto
+    		if (nl < 'a' && nl > 'z')
+    		{
+    			System.out.println("Attenzione: parola " + newWord + " non indicizzabile");
+    			break;
+    		}
+    
     		children = pointer.get(nl);
     		if (children == null)
     		{
-    			pointer.put(nl, children = new MyNode(alphabet,nl));
+    			children = pointer.put(nl);
     		}
     		pointer = children;
     	}
@@ -94,7 +104,7 @@ public class MyTrie {
 	public MyTrie(String dictionaryFile) 
 	{
 //		System.out.println("Creating root node");
-		pointer = root = new MyNode(alphabet);
+		pointer = root = new MyNode();
 //		System.out.println("Root node created");
 
 //		System.out.println("Loading dictionary");
